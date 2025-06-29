@@ -33,7 +33,6 @@ A computer vision project that allows you to control a virtual DJ controller usi
 - Processes video feed from your webcam
 
  Gesture Mappings
-- **Crossfader:** Pinching index with thumb on left and right hand, controls left and right
-deck respectively
+- **Crossfader:** Pinching index with thumb on left and right hand moves crossfader left/right respectively
 - **Play/Pause:** Open/closed fist
 - **More on the Way!**
