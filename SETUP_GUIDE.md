@@ -96,10 +96,9 @@ python mixxx_controller.py
 
 This will send test commands to Mixxx to verify the shortcuts work.
 
-## Safety Features
+## Concluding
 
-- **Failsafe**: Move your mouse to any corner of the screen to stop the controller
-- **Pause**: Press `q` in the hand controller window to quit
+- **End Script**: Press `q` in the hand controller window to quit
 
 ## Customization
 
