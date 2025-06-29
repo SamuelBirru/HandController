@@ -117,7 +117,6 @@ if __name__ == "__main__":
         print("Using official Mixxx default keyboard shortcuts")
         
         # Wait a moment for user to switch to Mixxx
-        print("\n Switching to Mixxx in 3 seconds...")
         time.sleep(3)
         
         # Test play/pause
