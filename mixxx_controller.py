@@ -10,10 +10,7 @@ class MixxxController:
     
     def __init__(self):
         self.is_connected = True  # Always connected since we use keyboard
-        self.current_volume_left = 0.5
-        self.current_volume_right = 0.5
         self.is_playing = False
-        self.simulation_mode = False
         
         # Mixxx default keyboard shortcuts
         self.keyboard_mappings = {
@@ -68,9 +65,6 @@ class MixxxController:
     def send_key(self, key: str, press_time: float = 0.1):
         """Send a keyboard key to Mixxx."""
         try:
-            if self.simulation_mode:
-                print(f"SIMULATION: Pressed key '{key}'")
-            else:
                 pyautogui.press(key)
                 print(f"Sent key: {key}")
         except Exception as e:
@@ -93,10 +87,7 @@ class MixxxController:
         return {
             'connected': self.is_connected,
             'controller_type': 'keyboard',
-            'simulation_mode': self.simulation_mode,
-            'playing': self.is_playing,
-            'volume_left': self.current_volume_left,
-            'volume_right': self.current_volume_right
+            'playing': self.is_playing
         }
     
     def cleanup(self):

@@ -1,7 +1,6 @@
 import cv2
 import numpy as np
 import time
-import sys
 from hand_tracker import HandTracker
 
 def test_hand_tracker_initialization():

@@ -1,8 +1,6 @@
 import cv2
 import numpy as np
 import time
-import sys
-
 from hand_tracker import HandTracker
 from mixxx_controller import MixxxController
 

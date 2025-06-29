@@ -27,9 +27,6 @@ class HandTracker:
             min_tracking_confidence=0.5   # Minimum confidence for tracking
         )
         
-        # Store hand landmarks
-        self.landmarks = None
-        self.hand_gestures = {}
         
     def process_frame(self, frame: np.ndarray) -> Tuple[np.ndarray, Optional[List]]:
         """
