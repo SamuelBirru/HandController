@@ -156,7 +156,7 @@ def main():
                         last_right_pinch_time = current_time
                     elif right_hand_pinch and right_pinch_active:
                         # Pinch held
-                        if current_time - last_right_pinch_time > 0.2:  # Only every 200ms
+                        if current_time - last_right_pinch_time > 0.15:  # Only every 150ms
                             mixxx.send_key('h')
                             last_right_pinch_time = current_time
                     elif not right_hand_pinch and right_pinch_active:
@@ -255,9 +255,9 @@ def main():
     avg_fps = frame_count / total_time if total_time > 0 else 0
     
     print("\n Test Statistics:")
-    print(f"   Total frames processed: {frame_count}")
-    print(f"   Total time: {total_time:.2f} seconds")
-    print(f"   Average FPS: {avg_fps:.1f}")
+    print(f"Total frames processed: {frame_count}")
+    print(f"Total time: {total_time:.2f} seconds")
+    print(f"Average FPS: {avg_fps:.1f}")
     
     # Cleanup
     cap.release()
