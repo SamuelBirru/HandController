@@ -76,7 +76,7 @@ class HandTracker:
                     landmarks.append((x, y))
                 
                 # Add hand type information to landmarks
-                landmarks.append(hand_type)  # Add hand type as the 22nd element
+                landmarks.append(hand_type) 
                 landmarks_list.append(landmarks)
         
         return processed_frame, landmarks_list
@@ -97,12 +97,12 @@ class HandTracker:
             if len(landmarks) < 22:  # Should have 21 landmarks + hand type
                 continue
                 
-            # Extract hand type (last element) and landmarks (first 21 elements)
-            hand_type = landmarks[-1]  # Last element is hand type
-            landmark_coords = landmarks[:-1]  # First 21 elements are coordinates
+            # Extract hand type and landmarks 
+            hand_type = landmarks[-1] 
+            landmark_coords = landmarks[:-1] 
             
             if hand_type in ["left", "right"]:
-                # Swap left and right since MediaPipe seems to be detecting them in reverse
+                # Swap left and right, MediaPipe detects them in reverse
                 if hand_type == "left":
                     hand_type = "right"
                 elif hand_type == "right":
