@@ -104,7 +104,6 @@ class HandTracker:
             hand_type = landmarks[-1]  # Last element is hand type
             landmark_coords = landmarks[:-1]  # First 21 elements are coordinates
             
-            
             if hand_type in ["left", "right"]:
                 # Swap left and right since MediaPipe seems to be detecting them in reverse
                 if hand_type == "left":
@@ -112,50 +111,16 @@ class HandTracker:
                 elif hand_type == "right":
                     hand_type = "left"
                 hand_id = f"{hand_type}_hand"
-            else:
-                # Fallback to position-based detection
-                hand_type = self._determine_hand_type(landmark_coords)
-                hand_id = f"{hand_type}_hand"
-            
-            # Detect basic gestures
-            gestures[hand_id] = {
-                'fist': self._is_fist(landmark_coords),
-                'open_hand': self._is_open_hand(landmark_coords),
-                'pinch': self._is_pinch(landmark_coords),
-                'hand_position': self._get_hand_position(landmark_coords)
-            }
+                
+                # Detect basic gestures
+                gestures[hand_id] = {
+                    'fist': self._is_fist(landmark_coords),
+                    'open_hand': self._is_open_hand(landmark_coords),
+                    'pinch': self._is_pinch(landmark_coords),
+                    'hand_position': self._get_hand_position(landmark_coords)
+                }
         
         return gestures
-    
-    def _determine_hand_type(self, landmarks: List[Tuple[int, int]]) -> str:
-        """
-        Determine if hand is left or right based on landmark positions.
-        
-        Args:
-            landmarks: List of hand landmark coordinates
-            
-        Returns:
-            'left' or 'right'
-        """
-        # Method 1: Use the relative positions of finger tips to determine hand orientation
-        # For a right hand: thumb should be on the left side of the hand
-        # For a left hand: thumb should be on the right side of the hand
-        
-        thumb_tip = landmarks[4]
-        index_tip = landmarks[8]
-        middle_tip = landmarks[12]
-        ring_tip = landmarks[16]
-        pinky_tip = landmarks[20]
-        
-        # Calculate the center of the palm (average of finger bases)
-        palm_center_x = (landmarks[5][0] + landmarks[9][0] + landmarks[13][0] + landmarks[17][0]) / 4
-        
-        # If thumb is to the left of the palm center, it's likely a right hand
-        # If thumb is to the right of the palm center, it's likely a left hand
-        if thumb_tip[0] < palm_center_x:
-            return "right"
-        else:
-            return "left"
     
     def _is_fist(self, landmarks: List[Tuple[int, int]]) -> bool:
         """Detect if hand is in a fist position."""

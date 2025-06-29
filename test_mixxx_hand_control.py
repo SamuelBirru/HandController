@@ -131,8 +131,8 @@ def main():
                         left_pinch_active = True
                         last_left_pinch_time = current_time
                     elif left_hand_pinch and left_pinch_active:
-                        # Pinch held - continue moving crossfader left (rate limited)
-                        if current_time - last_left_pinch_time > 0.1:  # Only every 100ms
+                        # Pinch held
+                        if current_time - last_left_pinch_time > 0.2:  # Only every 200ms
                             mixxx.send_key('g')
                             last_left_pinch_time = current_time
                     elif not left_hand_pinch and left_pinch_active:
@@ -148,18 +148,17 @@ def main():
                         mixxx.handle_play_pause(True, 'right')
                     previous_play_pause_right = current_play_pause_right
                     
-                    # Handle pinch volume control for right deck
                     right_hand_pinch = hand_gestures.get('pinch', False)
                     current_time = time.time()
                     
                     if right_hand_pinch and not right_pinch_active:
-                        # Pinch started - move crossfader right 
+                        # Pinch started 
                         mixxx.send_key('h')
                         right_pinch_active = True
                         last_right_pinch_time = current_time
                     elif right_hand_pinch and right_pinch_active:
-                        # Pinch held - continue moving crossfader right (rate limited)
-                        if current_time - last_right_pinch_time > 0.1:  # Only every 100ms
+                        # Pinch held
+                        if current_time - last_right_pinch_time > 0.2:  # Only every 200ms
                             mixxx.send_key('h')
                             last_right_pinch_time = current_time
                     elif not right_hand_pinch and right_pinch_active:
