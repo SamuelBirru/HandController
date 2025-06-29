@@ -14,7 +14,7 @@ A computer vision project that allows you to control a virtual DJ controller usi
 1. **Install Python 3.12, Python 3.13 is not compatible with mediapipe** 
 2. **Install dependencies:**
    ```bash
-   pip install -r requirements.txt
+   pip install -r dependencies.txt
    ```
 3. **Run the application:**
    ```bash
