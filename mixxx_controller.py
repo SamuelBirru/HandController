@@ -76,16 +76,6 @@ class MixxxController:
         except Exception as e:
             print(f"Failed to send key '{key}': {e}")
     
-    def send_hotkey(self, *keys, press_time: float = 0.1):
-        """Send a hotkey combination to Mixxx."""
-        try:
-            if self.simulation_mode:
-                print(f"SIMULATION: Pressed hotkey {'+'.join(keys)}")
-            else:
-                pyautogui.hotkey(*keys)
-                print(f" Sent hotkey: {'+'.join(keys)}")
-        except Exception as e:
-            print(f"Failed to send hotkey {'+'.join(keys)}: {e}")
     
     def handle_play_pause(self, play_pause_triggered: bool, deck: str = 'left'):
         """Handle play/pause gesture for specified deck."""
@@ -127,7 +117,7 @@ if __name__ == "__main__":
         print("Using official Mixxx default keyboard shortcuts")
         
         # Wait a moment for user to switch to Mixxx
-        print("\n⏳ Switching to Mixxx in 3 seconds...")
+        print("\n Switching to Mixxx in 3 seconds...")
         time.sleep(3)
         
         # Test play/pause

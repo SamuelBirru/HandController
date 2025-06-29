@@ -63,7 +63,7 @@ def main():
     print("- Right hand: Right deck controls")
     print("- Fist: Play/Pause")
     print("- Pinch: Crossfader control (hold pinch to move crossfader)")
-    print("- Press 'q' to quit, 's' to save screenshot")
+    print("- Press 'q' to quit")
     print("=" * 60)
     
     frame_count = 0
@@ -236,7 +236,7 @@ def main():
         y_offset += 15
         
         # Show instructions
-        cv2.putText(processed_frame, "Press 'q' to quit, 's' to save screenshot, 'f' for fullscreen, 'r' to reset", 
+        cv2.putText(processed_frame, "Press 'q' to quit, 'f' for fullscreen, 'r' to reset", 
                    (10, processed_frame.shape[0] - 20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (128, 128, 128), 1)
         
         # Display the frame
@@ -246,12 +246,6 @@ def main():
         key = cv2.waitKey(1) & 0xFF
         if key == ord('q'):
             break
-        elif key == ord('s'):
-            # Save screenshot
-            timestamp = time.strftime("%Y%m%d_%H%M%S")
-            filename = f"mixxx_hand_control_{timestamp}.png"
-            cv2.imwrite(filename, processed_frame)
-            print(f"Screenshot saved: {filename}")
         elif key == ord('f'):
             # Toggle fullscreen
             cv2.setWindowProperty('Hand-Controlled Mixxx', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)

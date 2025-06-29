@@ -122,9 +122,7 @@ class HandTracker:
                 'fist': self._is_fist(landmark_coords),
                 'open_hand': self._is_open_hand(landmark_coords),
                 'pinch': self._is_pinch(landmark_coords),
-                'pointing': self._is_pointing(landmark_coords),
-                'hand_position': self._get_hand_position(landmark_coords),
-                'finger_positions': self._get_finger_positions(landmark_coords)
+                'hand_position': self._get_hand_position(landmark_coords)
             }
         
         return gestures
@@ -195,34 +193,9 @@ class HandTracker:
         
         return distance < 30  # Threshold for pinch detection
     
-    def _is_pointing(self, landmarks: List[Tuple[int, int]]) -> bool:
-        """Detect pointing gesture (index finger extended, others curled)."""
-        # Index finger extended, others curled
-        index_tip = landmarks[8]
-        index_mid = landmarks[6]
-        middle_tip = landmarks[12]
-        middle_mid = landmarks[10]
-        
-        index_extended = index_tip[1] < index_mid[1]
-        middle_curled = middle_tip[1] > middle_mid[1]
-        
-        return index_extended and middle_curled
-    
     def _get_hand_position(self, landmarks: List[Tuple[int, int]]) -> Tuple[int, int]:
         """Get the center position of the hand (wrist)."""
         return landmarks[0]  # Wrist position
-    
-    def _get_finger_positions(self, landmarks: List[Tuple[int, int]]) -> dict:
-        """Get positions of all finger tips."""
-        return {
-            'thumb': landmarks[4],
-            'index': landmarks[8],
-            'middle': landmarks[12],
-            'ring': landmarks[16],
-            'pinky': landmarks[20]
-        }
-    
-
     
     def release(self):
         """Release resources."""

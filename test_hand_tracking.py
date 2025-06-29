@@ -16,60 +16,28 @@ def test_hand_tracker_initialization():
         return False
 
 def test_gesture_detection():
-    """Test gesture detection with mock landmarks."""
+    """Test gesture detection functionality."""
     try:
         tracker = HandTracker()
         
-        # Create mock landmarks for different gestures
-        # Mock fist landmarks (fingers curled)
-        fist_landmarks = [(100, 100)] * 21  # Simplified mock data
-        fist_landmarks[8] = (100, 150)   # Index tip below middle
-        fist_landmarks[12] = (100, 160)  # Middle tip below middle
-        fist_landmarks[16] = (100, 170)  # Ring tip below middle
-        fist_landmarks[20] = (100, 180)  # Pinky tip below middle
+        # Test with empty landmarks
+        gestures = tracker.detect_gestures([])
+        assert gestures == {}, "Empty landmarks should return empty gestures"
         
-        # Mock open hand landmarks (fingers extended)
-        open_landmarks = [(100, 100)] * 21
-        open_landmarks[8] = (100, 50)    # Index tip above middle
-        open_landmarks[12] = (100, 40)   # Middle tip above middle
-        open_landmarks[16] = (100, 30)   # Ring tip above middle
-        open_landmarks[20] = (100, 20)   # Pinky tip above middle
+        # Test with mock landmarks
+        mock_landmarks = [(100, 100)] * 21 + ["left"]  # 21 landmarks + hand type
+        gestures = tracker.detect_gestures([mock_landmarks])
         
-        # Test gesture detection
-        gestures = tracker.detect_gestures([fist_landmarks, open_landmarks])
+        assert "left_hand" in gestures, "Should detect left hand"
+        assert "fist" in gestures["left_hand"], "Should have fist detection"
+        assert "open_hand" in gestures["left_hand"], "Should have open_hand detection"
+        assert "pinch" in gestures["left_hand"], "Should have pinch detection"
         
-        print("Gesture detection: PASSED")
         tracker.release()
+        print("✅ Gesture detection test passed")
         return True
     except Exception as e:
-        print(f"Gesture detection: FAILED - {e}")
-        return False
-
-def test_dj_controls():
-    """Test DJ control mapping."""
-    try:
-        tracker = HandTracker()
-        
-        # Test empty gestures
-        empty_controls = tracker.get_dj_controls({})
-        assert 'volume_left' in empty_controls
-        assert 'volume_right' in empty_controls
-        
-        # Test with mock gestures
-        mock_gestures = {
-            'hand_0': {
-                'open_hand': True,
-                'pinch': False,
-                'hand_position': (100, 200)
-            }
-        }
-        
-        controls = tracker.get_dj_controls(mock_gestures)
-        print(" DJ controls mapping: PASSED")
-        tracker.release()
-        return True
-    except Exception as e:
-        print(f" DJ controls mapping: FAILED - {e}")
+        print(f"❌ Gesture detection test failed: {e}")
         return False
 
 def run_unit_tests():
@@ -79,8 +47,7 @@ def run_unit_tests():
     
     tests = [
         test_hand_tracker_initialization,
-        test_gesture_detection,
-        test_dj_controls
+        test_gesture_detection
     ]
     
     passed = 0
@@ -118,7 +85,7 @@ def main():
     print("- Pinch gesture: Cue point")
     print("- Fist: Play/Pause")
     print("- Pointing: Scratch control")
-    print("- Press 'q' to quit, 's' to save screenshot")
+    print("- Press 'q' to quit")
     print("=" * 60)
     
     # Initialize hand tracker
@@ -187,9 +154,6 @@ def main():
         if gestures:
             print(f"Detected hands: {list(gestures.keys())}")
         
-        # Get DJ controls
-        dj_controls = tracker.get_dj_controls(gestures)
-       
         # Display information on frame
         y_offset = 30
         cv2.putText(processed_frame, "Hand-Controlled DJ Controller", (10, y_offset), 
@@ -233,7 +197,7 @@ def main():
         
         
         # Show instructions
-        cv2.putText(processed_frame, "Press 'q' to quit, 's' to save screenshot, 'f' for fullscreen, 'r' to reset", 
+        cv2.putText(processed_frame, "Press 'q' to quit, 'f' for fullscreen, 'r' to reset", 
                    (10, processed_frame.shape[0] - 20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (128, 128, 128), 1)
         
         # Display the frame
@@ -243,12 +207,6 @@ def main():
         key = cv2.waitKey(1) & 0xFF
         if key == ord('q'):
             break
-        elif key == ord('s'):
-            # Save screenshot
-            timestamp = time.strftime("%Y%m%d_%H%M%S")
-            filename = f"dj_controller_screenshot_{timestamp}.png"
-            cv2.imwrite(filename, processed_frame)
-            print(f"Screenshot saved: {filename}")
         elif key == ord('f'):
             # Toggle fullscreen
             cv2.setWindowProperty('Hand-Controlled DJ Controller', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
