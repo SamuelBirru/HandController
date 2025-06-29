@@ -12,7 +12,7 @@
 
 3. **Run the hand controller**:
    ```bash
-   python test_mix;xx_hand_control.py
+   python test_mixxx_hand_control.py
    ```
 
 4. **Make Mixxx the active window**
@@ -23,7 +23,7 @@
 
 The hand controller automatically sends keyboard shortcuts to Mixxx. **No manual mapping required!** The controller uses Mixxx's official default keyboard shortcuts:
 
-### Official Mixxx Default Keyboard Shortcuts Used:
+### Official Mixxx Default Keyboard Shortcuts Used (Keep in mind only Play/Pause and Crossfader Left/Right are currently implemented):
 
 | Control | Left Deck | Right Deck |
 |---------|-----------|------------|
