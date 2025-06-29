@@ -4,7 +4,7 @@
 
 1. **Install dependencies**:
    ```bash
-   pip install -r requirements.txt
+   pip install -r dependencies.txt
    ```
 
 2. **Download and Start Mixxx** 

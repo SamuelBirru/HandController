@@ -16,7 +16,7 @@ A computer vision project that allows you to control a virtual DJ controller usi
    ```bash
    pip install -r dependencies.txt
    ```
-3. **Run the application:**
+3. **Run the script:**
    ```bash
    python test_mixxx_hand_control.py
    ```
@@ -24,6 +24,12 @@ A computer vision project that allows you to control a virtual DJ controller usi
    ```bash
    python test_hand_tracking.py
    ```
+
+4. **Open Mixxx and start Mixing!:**
+      It can be downloaded here, 
+      ```
+      https://mixxx.org/download/
+      ```
 
 ## How It Works
 
@@ -35,4 +41,9 @@ A computer vision project that allows you to control a virtual DJ controller usi
  Gesture Mappings
 - **Crossfader:** Pinching index with thumb on left and right hand moves crossfader left/right respectively
 - **Play/Pause:** Open/closed fist
-- **More on the Way!**
+
+   I suggest reading the Setup Guide for more detailed  setup info!
+   '''
+   https://github.com/SamuelBirru/HandController/blob/main/SETUP_GUIDE.md
+   '''
+   **More on the Way!**
