@@ -9,7 +9,7 @@ class MixxxController:
     """
     
     def __init__(self):
-        self.is_connected = True  # Always connected since we use keyboard
+        self.is_connected = True  
         self.is_playing = False
         
         # Mixxx default keyboard shortcuts
@@ -55,7 +55,7 @@ class MixxxController:
         
         # Configure pyautogui for safety
         pyautogui.FAILSAFE = True  # Move mouse to corner to stop
-        pyautogui.PAUSE = 0.01      # Small delay between actions
+        pyautogui.PAUSE = 0.1      # Small delay between actions
         
         print("Keyboard controller ready")
         print("Make sure Mixxx is running and is the active window")
@@ -93,32 +93,4 @@ class MixxxController:
     def cleanup(self):
         """Clean up controller."""
         print(" Keyboard controller closed")
-
-# Test function
-if __name__ == "__main__":
-    print(" Mixxx Keyboard Controller Test")
-    print("=" * 50)
     
-    controller = MixxxController()
-    
-    if controller.is_connected:
-        print("\n Testing keyboard commands...")
-        print("Make sure Mixxx is running and is the active window!")
-        print("The test will send keyboard shortcuts to Mixxx")
-        print("Using official Mixxx default keyboard shortcuts")
-        
-        # Wait a moment for user to switch to Mixxx
-        time.sleep(3)
-        
-        # Test play/pause
-        controller.handle_play_pause(True, 'left')
-        time.sleep(1)
-        controller.handle_play_pause(True, 'right')
-        time.sleep(1)
-        
-        print("\n Keyboard test completed!")
-        print(" Check Mixxx to see if the controls are working")
-    else:
-        print("\n Cannot test - controller not connected")
-    
-    controller.cleanup()

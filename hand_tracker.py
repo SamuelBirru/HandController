@@ -121,9 +121,9 @@ class HandTracker:
     
     def _is_fist(self, landmarks: List[Tuple[int, int]]) -> bool:
         """Detect if hand is in a fist position."""
-        # Check if all fingers are curled (except thumb)
-        finger_tips = [8, 12, 16, 20]  # Index, middle, ring, pinky tips
-        finger_mids = [6, 10, 14, 18]  # Middle joints
+        # Check fingers are curled (except thumb)
+        finger_tips = [8, 12, 16, 20] 
+        finger_mids = [6, 10, 14, 18]  
         
         curled_fingers = 0
         for tip, mid in zip(finger_tips, finger_mids):
@@ -134,13 +134,12 @@ class HandTracker:
     
     def _is_open_hand(self, landmarks: List[Tuple[int, int]]) -> bool:
         """Detect if hand is open (fingers extended)."""
-        # Check if fingers are extended
         finger_tips = [8, 12, 16, 20]
         finger_mids = [6, 10, 14, 18]
         
         extended_fingers = 0
         for tip, mid in zip(finger_tips, finger_mids):
-            if landmarks[tip][1] < landmarks[mid][1]:  # Tip above middle joint
+            if landmarks[tip][1] < landmarks[mid][1]:  
                 extended_fingers += 1
         
         return extended_fingers >= 4  # At least 4 fingers extended

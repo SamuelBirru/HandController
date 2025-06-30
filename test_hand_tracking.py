@@ -33,10 +33,10 @@ def test_gesture_detection():
         assert "pinch" in gestures["left_hand"], "Should have pinch detection"
         
         tracker.release()
-        print("✅ Gesture detection test passed")
+        print(" Gesture detection test passed")
         return True
     except Exception as e:
-        print(f"❌ Gesture detection test failed: {e}")
+        print(f" Gesture detection test failed: {e}")
         return False
 
 def run_unit_tests():
